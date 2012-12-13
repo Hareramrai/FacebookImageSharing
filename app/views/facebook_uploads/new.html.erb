@@ -1,0 +1,55 @@
+
+<script type="text/javascript">
+$(document).ready(function () {
+  $("#friends").tokenInput([
+    <% @friends.each do |friend| %>
+     {
+       id: <%=  "\'#{friend.raw_attributes[:id]}\'".html_safe%> ,
+       name: <%= "\'#{friend.name}\'".html_safe %> ,
+       image_url: <%=  "\'http://graph.facebook.com/#{friend.raw_attributes[:id]}/picture\'".html_safe %>
+     },
+    <% end %>
+  ],
+   {
+     theme: "facebook",
+     hintText: "Tag your friends.",
+     noResultsText: "O Friends found",
+     searchingText: "Searching friends by Name...",
+     deleteText: "&#x2603;",
+     preventDuplicates: true,
+     propertyToSearch: "name",
+     resultsFormatter: function(item){ 
+       return "<li>" + "<img src='" + item.image_url + "' title='" + item.name+ "' height='25px' width='25px' />" + "<div style='display: inline-block; padding-left: 10px;'><div class='full_name'>" + item.name + "</div></div></li>" 
+     },
+     tokenFormatter: function(item) { 
+       return "<li><p>" + item.name+ "</p></li>" 
+     }
+   }
+   
+);
+  
+});  
+    
+</script>
+
+<%= form_tag(facebook_uploads_path, :class =>'form-horizontal' ) do -%>
+
+  <%= field_set_tag 'Tags your friends' do %>
+
+    <div class="control-group">
+        <%=  label_tag :friends, nil, :class => 'control-label' %>
+        <div class="controls">
+          <%= text_field_tag :friends, nil, :class => 'check_box' %>
+        </div>
+        <%= hidden_field_tag :image_id , @image_id %>
+    </div>
+
+    <div class="form-actions">
+        <%= submit_tag nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    images_path, :class => 'btn' %>
+    </div>
+
+  <% end %>
+
+<% end %>

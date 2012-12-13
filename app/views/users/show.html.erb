@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>My Profile Details</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>Profile Picture</strong></dt>
+  <dd><%=image_tag current_user.facebook_image %></dd> 
+  <dt><strong>Name </strong></dt>
+  <dd><%= current_user.name %></dd>
+  <dt><strong>Email</strong></dt>
+  <dd><%= current_user.email %></dd>
+ 
+</dl>
