@@ -11,7 +11,10 @@ FileUploader::Application.routes.draw do
   
   resources :users do
     collection do
-      get "my_uploads"
+      get "my_uploads"      
+      get "authorize"
+      get "dropbox_callback"  
+      get "dropbox_download"
     end
   end
   

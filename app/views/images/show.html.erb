@@ -21,7 +21,11 @@
 </dl>
 
 <div class="form-actions">
-  
+  <% if current_user.dropbox_token.blank? %>
+  <%= link_to "Authorize Dropbox",authorize_users_path ,:class => 'btn btn-primary'   %>
+  <% else %>
+  <%= link_to "Download Dropbox",dropbox_download_users_path ,:class => 'btn btn-primary'   %>
+  <% end %>
   
   <%= link_to "Upload to Facebook",new_facebook_upload_path, :class => 'btn btn-primary color-box-ajax'  %>
   <%= link_to t('.back', :default => t("helpers.links.back")),
