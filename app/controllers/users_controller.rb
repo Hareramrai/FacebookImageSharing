@@ -37,6 +37,7 @@ class UsersController < ApplicationController
     id = request.env["HTTP_REFERER"].split("/").last
     image = Image.find_by_id(id)
     filename= File.join(Rails.root,"public",Time.now.to_i.to_s+"."+image.picture_file_name.split(".").last)
+    logger.debug "@@@@@@@@ #{client.account_info}" 
     
     require 'open-uri'
     open(filename, 'wb') do |file|
@@ -45,11 +46,8 @@ class UsersController < ApplicationController
     
     data = File.read(filename)
     
-    logger.debug "@@@@@@@@#{filename}" 
-    
-    client.put_file(filename, data)        
-    
-    logger.debug "@@@@@@@@ #{client.account_info}" 
+    logger.debug "@@@@@@@@#{filename}"     
+    client.put_file(filename, data)            
     
     redirect_to request.referrer
     
