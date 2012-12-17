@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   def authorize
     consumer = Dropbox::API::OAuth.consumer(:authorize)
     session[:request_token] = consumer.get_request_token
-    redirect_to session[:request_token].authorize_url(:oauth_callback => "http://192.168.9.247:3000/users/dropbox_callback")
+    redirect_to session[:request_token].authorize_url(:oauth_callback => "http://http://warm-badlands-9447.herokuapp.com/users/dropbox_callback")
     
   end
 
