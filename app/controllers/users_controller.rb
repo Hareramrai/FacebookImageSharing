@@ -1,3 +1,5 @@
+require 'dropbox_sdk'
+
 class UsersController < ApplicationController
   
   def my_uploads
@@ -43,4 +45,5 @@ class UsersController < ApplicationController
     client.put_file(filename, data)        
     redirect_to request.referrer
   end
+  
 end
