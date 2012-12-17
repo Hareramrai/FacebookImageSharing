@@ -51,9 +51,7 @@ class User < ActiveRecord::Base
     #open(filename, 'wb') do |file|
     #   file << open(image.picture.url).read
     #end        
-    #data = File.read(filename)    
-    puts "@@@@@@@@#{filename}"         
-    client.put_file(filename, data)    
+    #data = File.read(filename)          
     client.get_file(image.picture.url)
     client.shares(image.picture.url)
   end
