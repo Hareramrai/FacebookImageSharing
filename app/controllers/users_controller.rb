@@ -33,17 +33,26 @@ class UsersController < ApplicationController
     
     dbsession = DropboxSession.deserialize(current_user.dropbox_session)
     client = DropboxClient.new(dbsession, DROPBOX_APP_MODE) 
+    logger.debug "@@@@@@@@ #{client.account_info}" 
     id = request.env["HTTP_REFERER"].split("/").last
     image = Image.find_by_id(id)
     filename= File.join(Rails.root,"public",Time.now.to_i.to_s+"."+image.picture_file_name.split(".").last)
+    
     require 'open-uri'
     open(filename, 'wb') do |file|
       file << open(image.picture.url).read
-    end
+    end    
     
     data = File.read(filename)
+    
+    logger.debug "@@@@@@@@#{filename}" 
+    
     client.put_file(filename, data)        
+    
+    logger.debug "@@@@@@@@ #{client.account_info}" 
+    
     redirect_to request.referrer
+    
   end
   
 end
