@@ -21,11 +21,3 @@ test:
   password: mindfire
   pool: 5
   timeout: 5000
-
-production:
-  adapter: mysql2
-  database: file_uploader_dev
-  user: root
-  password: mindfire
-  pool: 5
-  timeout: 5000

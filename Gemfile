@@ -18,6 +18,9 @@ gem "dropbox-api"
 gem "cancan"
 gem "fb_graph"
 
+group :production do
+  gem "pg"
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

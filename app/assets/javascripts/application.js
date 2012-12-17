@@ -16,12 +16,13 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-	$(document).ready(function(){
-            
-         $(".color-box-ajax").colorbox({ transition:"elastic",
-             width:"60%", 
-             height:"60%",
-             opacity: "0.85"
-         });   
-            
-        });
+$(document).ready(function(){
+
+ $(".color-box-ajax").colorbox({ 
+     transition:"elastic",             
+     opacity: "0.50",
+     escKey: false,
+     overlayClose: false
+ });   
+
+});

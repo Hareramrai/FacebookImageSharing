@@ -1,13 +1,16 @@
 class FacebookUploadsController < ApplicationController
   
   def new
+    
     @image_id = request.env["HTTP_REFERER"].split("/").last
     facebook_user = FbGraph::User.me(current_user.auth_token).fetch
     @friends = facebook_user.friends   
     render :layout => false
+    
   end
   
   def create
+    
     @image = Image.find_by_id(params[:image_id])  #picture.url
     me = FbGraph::User.me(current_user.auth_token)
     friends = params[:friends].split(",")
@@ -25,7 +28,7 @@ class FacebookUploadsController < ApplicationController
  
     FbGraph::User.me(current_user.auth_token).photo!(
       :url => @image.picture.url ,
-      :message => 'Testing the facebook image upload application.',
+      :message => params[:message],
       :tags => tags
     )
     
