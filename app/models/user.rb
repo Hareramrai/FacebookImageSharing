@@ -40,6 +40,22 @@ class User < ActiveRecord::Base
     self.is_admin
 
   end
+  
+  def download_to_dropbox(user_id,image_id)
+    current_user = User.find_by_id(user_id)
+    dbsession = DropboxSession.deserialize(current_user.dropbox_session)
+    client = DropboxClient.new(dbsession, DROPBOX_APP_MODE)     
+    image = Image.find_by_id(image_id)    
+    filename= File.join(Rails.root,"public",Time.now.to_i.to_s+"."+image.picture_file_name.split(".").last)       
+    require 'open-uri'
+    open(filename, 'wb') do |file|
+      file << open(image.picture.url).read
+    end        
+    data = File.read(filename)    
+    puts "@@@@@@@@#{filename}"         
+    client.put_file(filename, data)    
+    
+  end
     
   
    

@@ -31,22 +31,10 @@ class UsersController < ApplicationController
   
   def dropbox_download
     
-    dbsession = DropboxSession.deserialize(current_user.dropbox_session)
-    client = DropboxClient.new(dbsession, DROPBOX_APP_MODE) 
-    
-    id = request.env["HTTP_REFERER"].split("/").last
-    image = Image.find_by_id(id)
-    filename= File.join(Rails.root,"public",Time.now.to_i.to_s+"."+image.picture_file_name.split(".").last)       
-    require 'open-uri'
-    open(filename, 'wb') do |file|
-      file << open(image.picture.url).read
-    end    
-    
-    data = File.read(filename)    
-    puts "@@@@@@@@#{filename}"         
-    client.put_file(filename, data)            
-    
-    redirect_to request.referrer
+   id = request.env["HTTP_REFERER"].split("/").last
+   image = Image.find_by_id(id)        
+   current_user.delay.download_to_dropbox(current_user.id,image.id)    
+   redirect_to request.referrer
     
   end
   

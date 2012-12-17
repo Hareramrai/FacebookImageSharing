@@ -50,6 +50,11 @@ GEM
     debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
     debugger-ruby_core_source (1.1.5)
+    delayed_job (3.0.4)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.3)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.0.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -133,7 +138,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack-timeout (0.0.3)
     rails (3.2.8)
       actionmailer (= 3.2.8)
       actionpack (= 3.2.8)
@@ -187,6 +191,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   debugger
+  delayed_job_active_record
   devise (= 2.0.0)
   dropbox-sdk
   fb_graph
@@ -198,7 +203,6 @@ DEPENDENCIES
   paperclip (~> 3.1)
   paperclip-dropbox
   pg
-  rack-timeout
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
   therubyracer
