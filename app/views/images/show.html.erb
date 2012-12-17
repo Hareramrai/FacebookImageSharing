@@ -21,7 +21,7 @@
 </dl>
 
 <div class="form-actions">
-  <% if current_user.dropbox_token.blank? %>
+  <% if current_user.dropbox_session.blank? %>
   <%= link_to "Authorize Dropbox",authorize_users_path ,:class => 'btn btn-primary'   %>
   <% else %>
   <%= link_to "Download Dropbox",dropbox_download_users_path ,:class => 'btn btn-primary'   %>

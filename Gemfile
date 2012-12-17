@@ -15,7 +15,7 @@ gem 'omniauth-facebook'
 gem 'devise', '2.0.0'
 gem "paperclip-dropbox"
 gem "paperclip", "~> 3.1"
-gem "dropbox-api"
+gem "dropbox-sdk"
 gem "cancan"
 gem "fb_graph"
 gem 'libv8', '~> 3.11.8'

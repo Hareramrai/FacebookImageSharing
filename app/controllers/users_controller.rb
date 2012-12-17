@@ -9,22 +9,28 @@ class UsersController < ApplicationController
   end
   
   def authorize
-    consumer = Dropbox::API::OAuth.consumer(:authorize)
-    session[:request_token] = consumer.get_request_token
-    redirect_to session[:request_token].authorize_url(:oauth_callback => "http://warm-badlands-9447.herokuapp.com/users/dropbox_callback")
+    
+    dbsession = DropboxSession.new(DROPBOX_APP_KEY, DROPBOX_APP_KEY_SECRET)
+    session[:dropbox_session] = dbsession.serialize #serialize and save this DropboxSession
+    #pass to get_authorize_url a callback url that will return the user here
+    redirect_to dbsession.get_authorize_url url_for(:action => 'dropbox_callback')
     
   end
 
   def dropbox_callback  
     
-    access = session[:request_token].get_access_token(:oauth_verifier => params[:oauth_token])     
-    current_user.update_attributes(:dropbox_token =>access.params[:oauth_token],:dropbox_secret => access.params[:oauth_token_secret] )              
+    dbsession = DropboxSession.deserialize(session[:dropbox_session])
+    dbsession.get_access_token  #we've been authorized, so now request an access_token
+    session[:dropbox_session] = dbsession.serialize      
+    current_user.update_attributes(:dropbox_session=> session[:dropbox_session])
+    session.delete :dropbox_session
     redirect_to images_path
   end
   
   def dropbox_download
     
-    @client = Dropbox::API::Client.new(:token  => current_user.dropbox_token, :secret => current_user.dropbox_secret)
+    dbsession = DropboxSession.deserialize(current_user.dropbox_session)
+    client = DropboxClient.new(dbsession, DROPBOX_APP_MODE) 
     id = request.env["HTTP_REFERER"].split("/").last
     image = Image.find_by_id(id)
     filename= File.join(Rails.root,"public",Time.now.to_i.to_s+"."+image.picture_file_name.split(".").last)
@@ -34,9 +40,7 @@ class UsersController < ApplicationController
     end
     
     data = File.read(filename)
-    
-    @client.upload filename, data
-    
+    client.put_file(filename, data)        
     redirect_to request.referrer
   end
 end

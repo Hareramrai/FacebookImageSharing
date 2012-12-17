@@ -55,10 +55,6 @@ GEM
       orm_adapter (~> 0.0.3)
       railties (~> 3.1)
       warden (~> 1.1)
-    dropbox-api (0.3.2)
-      hashie
-      multi_json
-      oauth
     dropbox-sdk (1.5.1)
       json
     erubis (2.7.0)
@@ -97,7 +93,6 @@ GEM
     multi_json (1.5.0)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
-    oauth (0.4.7)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -192,7 +187,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   devise (= 2.0.0)
-  dropbox-api
+  dropbox-sdk
   fb_graph
   jquery-rails
   less-rails
