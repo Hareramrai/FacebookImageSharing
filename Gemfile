@@ -19,7 +19,7 @@ gem "dropbox-sdk"
 gem "cancan"
 gem "fb_graph"
 gem 'libv8', '~> 3.11.8'
-
+gem "rack-timeout"
 group :production do
   gem "pg"
 end
