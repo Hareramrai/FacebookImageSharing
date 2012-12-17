@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     
    id = request.env["HTTP_REFERER"].split("/").last
    image = Image.find_by_id(id)        
-   current_user.delay.download_to_dropbox(current_user.id,image.id)    
+   current_user.download_to_dropbox(current_user.id,image.id)    
    redirect_to request.referrer
     
   end
