@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :name, :auth_token ,  :provider, :uid, :facebook_image, :dropbox_secret, :dropbox_token
+  attr_accessible :name, :auth_token ,  :provider, :uid, :facebook_image, :dropbox_session
      
   has_many :images
     
