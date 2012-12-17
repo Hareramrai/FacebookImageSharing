@@ -5,7 +5,10 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+group :development do
+  gem 'mysql2'
+end
+
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 gem 'omniauth-facebook'
@@ -15,6 +18,7 @@ gem "paperclip", "~> 3.1"
 gem "dropbox-api"
 gem "cancan"
 gem "fb_graph"
+gem 'libv8', '~> 3.11.8'
 
 group :production do
   gem "pg"
