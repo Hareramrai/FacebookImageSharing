@@ -31,9 +31,8 @@ class UsersController < ApplicationController
   
   def dropbox_download
     
-   id = request.env["HTTP_REFERER"].split("/").last
-   image = Image.find_by_id(id)        
-   current_user.download_to_dropbox(current_user.id,image.id)    
+   id = request.env["HTTP_REFERER"].split("/").last   
+   current_user.download_to_dropbox(current_user.id,id)       
    redirect_to request.referrer
     
   end
