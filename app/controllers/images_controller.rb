@@ -94,12 +94,14 @@ class ImagesController < ApplicationController
       @images = Image.where("category LIKE '%?%' OR tags LIKE '%?%' OR picture_file_name LIKE '%?%'",params[:key],params[:key],params[:key])
       
     else
-      @images = Image.where("category = ?",params[:id])
-      logger.debug @images.inspect
-      respond_to do |format|
+      
+      @images = Image.where("category = ?",params[:id])      
+      
+    end
+    
+    respond_to do |format|
       format.html { render "index"}
       format.json { render json: @images }
-    end
     end
     
   end
