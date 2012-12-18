@@ -15,8 +15,8 @@ class Ability
        can :manage,  Image do |image|
           image.user_id.nil? or image.user_id == user.id
        end 
-       
-        can :my_uploads, User
+       can :show,Image  
+       can :my_uploads, User
         
      else
 
