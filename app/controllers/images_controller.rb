@@ -91,7 +91,7 @@ class ImagesController < ApplicationController
     
     if params[:id] == "search"
       
-      @images = Image.where("category LIKE '%?%' OR tags LIKE '%?%' OR picture_file_name LIKE '%?%'",params[:key],params[:key],params[:key])
+      @images = Image.where("tags LIKE '%#{params[:key]}%' OR  picture_file_name LIKE '%#{params[:key]}%' OR category LIKE '%#{params[:key]}%' ")      
       
     else
       
