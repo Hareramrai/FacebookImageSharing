@@ -1,4 +1,17 @@
+=begin
+
+  @File Name                 : ability.rb
+  @Company Name              : Mindfire Solutions 
+  @Creator Name              : Hare Ram Rai
+  @Date Created              : 15-12-2012
+  @Date Modified             :
+  @Last Modification Details :
+  @Purpose                   : To manage the ablity of the different user's
+
+=end
+
 class Ability
+  
   include CanCan::Ability
 
   def initialize(user)
@@ -15,6 +28,7 @@ class Ability
        can :manage,  Image do |image|
           image.user_id.nil? or image.user_id == user.id
        end 
+       
        can :show,Image  
        can :my_uploads, User
         

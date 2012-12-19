@@ -1,1 +1,19 @@
-<h2>Welcome to File Uploader site</h2>
+<h2>Welcome to Picture Sharing site</h2>
+
+<div id="myCarousel-body">
+    <div class="carousel slide" id="myCarousel">
+    <div class="carousel-inner">
+      <% @images.each do |image| %>
+        <div class="item">
+          <%= link_to(image_tag(image.picture.url(:medium)),image_path(image))%>
+          <div class="carousel-caption">
+            <h4><b>Category:</b> <%= image.category %></h4>
+            <p><%= image.tags%></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <a data-slide="prev" href="#myCarousel" class="left carousel-control">‹</a>
+    <a data-slide="next" href="#myCarousel" class="right carousel-control">›</a>
+  </div>
+</div>

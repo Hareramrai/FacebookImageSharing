@@ -1,51 +1,90 @@
+=begin
+
+  @File Name                 : images_controller.rb
+  @Company Name              : Mindfire Solutions 
+  @Creator Name              : Hare Ram Rai
+  @Date Created              : 15-12-2012
+  @Date Modified             :
+  @Last Modification Details :
+  @Purpose                   : To manage the images
+
+=end
+
 class ImagesController < ApplicationController
+  
+  # for user authentication 
   before_filter :authenticate_user!, :except => [:index,:search]
   #load_and_authorize_resource
   load_and_authorize_resource :except => [:search]
 
-  # GET /images
-  # GET /images.json
+  
+  # @Params  : None
+  # @Return  : None
+  # @Purpose : To display all the images
   def index
+    
+    #fetch the all images
     @images = Image.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @images }
     end
-  end
+    
+  end # end of index action
 
-  # GET /images/1
-  # GET /images/1.json
+ 
+  # @Params  : params[:id]
+  # @Return  : None
+  # @Purpose : To show the a image   
   def show
+    
+    # find the image by id
     @image = Image.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @image }
     end
-  end
+    
+  end # end of show action
 
-  # GET /images/new
-  # GET /images/new.json
+  
+  # @Params  : None
+  # @Return  : None
+  # @Purpose : To display a form for creating image
   def new
+    
     @image = Image.new
 
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @image }
     end
-  end
-
-  # GET /images/1/edit
+    
+  end # end of new action
+  
+  # @Params  : params[:id]
+  # @Return  : None
+  # @Purpose : To edit the image
   def edit
+    
     @image = Image.find(params[:id])
-  end
+    
+  end # end of edit action
 
-  # POST /images
-  # POST /images.json
+  
+  # @Params  : params[:image]
+  # @Return  : None
+  # @Purpose : To create the new image object
   def create
+    
+    # create the image with params[:image]
     @image = Image.new(params[:image])
+    
+    #set the user_id of image with current user id
     @image.user_id = current_user.id
+    
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
@@ -55,14 +94,23 @@ class ImagesController < ApplicationController
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
-  end
+    
+  end # end of create action
 
-  # PUT /images/1
-  # PUT /images/1.json
+ 
+  # @Params  : params[:id]
+  # @Return  : None
+  # @Purpose : To update the image object
   def update
+    
+    # find the image with params[:id]
     @image = Image.find(params[:id])
+    
+    #set the user_id of image with current user id
     @image.user_id = current_user.id
+    
     respond_to do |format|
+      
       if @image.update_attributes(params[:image])
         format.html { redirect_to @image, notice: 'Image was successfully updated.' }
         format.json { head :no_content }
@@ -70,40 +118,56 @@ class ImagesController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
+      
     end
-  end
+    
+  end # end of update action
 
-  # DELETE /images/1
-  # DELETE /images/1.json
+ 
+  # @Params  : params[:id]
+  # @Return  : None
+  # @Purpose : To delete the image 
   def destroy
+    
+    # find the image with params[:id]
     @image = Image.find(params[:id])
+    
+    #delete the image
     @image.destroy
 
     respond_to do |format|
+      
       format.html { redirect_to images_url }
       format.json { head :no_content }
+      
     end
-  end
-  
-  # GET /images/:cateory/search
-  # GET /images/:cateory/search.json
+    
+  end # end of destroy action
+
+  # @Params  : None
+  # @Return  : None
+  # @Purpose : To search the image based on key or category
   def search
     
     if params[:id] == "search"
       
-      #@images = Image.where("tags LIKE '%#{params[:key]}%' OR  picture_file_name LIKE '%#{params[:key]}%' OR category LIKE '%#{params[:key]}%' ")      
+      # find the related image to params[:key]
       @images = Image.where("tags LIKE ? OR  picture_file_name LIKE ? OR category LIKE ?", "%#{params[:key]}%", "%#{params[:key]}%", "%#{params[:key]}%")      
       
     else
       
+      # find the image by category 
       @images = Image.where("category = ?",params[:id])      
       
     end
     
     respond_to do |format|
+      
       format.html { render "index"}
       format.json { render json: @images }
+      
     end
     
-  end
-end
+  end # end of search action
+  
+end # end of class

@@ -1,3 +1,14 @@
+=begin
+
+  @File Name                 : image.rb
+  @Company Name              : Mindfire Solutions
+  @Creator Name              : Hare Ram Rai
+  @Date Created              : 15-12-2012
+  @Date Modified             :
+  @Last Modification Details :
+  @Purpose                   : To manage the image model
+
+=end
 class Image < ActiveRecord::Base  
   
   attr_accessible :picture, :verified, :category, :tags, :user_id
@@ -11,9 +22,28 @@ class Image < ActiveRecord::Base
       :unique_filename => true
     }
 
+######################################################################################################################
+#           VALIDATION STARTS HERE                                                                                   #
+######################################################################################################################
+
     validates :picture, :attachment_presence => true
     validates :tags, :presence =>true
     validates :category, :presence => true
-    
+   
+######################################################################################################################
+#            VALIDATION ENDS HERE                                                                                    #
+######################################################################################################################
+ 
+  ##########################
+  #Defining Associations   #
+  ##########################
+  
     belongs_to :user
-end
+    
+  ##########################
+  #End Defining Associations
+  ##########################  
+  
+  
+  
+end # end of class

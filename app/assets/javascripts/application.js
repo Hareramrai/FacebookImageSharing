@@ -24,5 +24,7 @@ $(document).ready(function(){
      escKey: false,
      overlayClose: false
  });   
+ 
+ $(".carousel-inner div.item:first").addClass("active")
 
 });
