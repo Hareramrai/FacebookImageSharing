@@ -4,8 +4,8 @@
   @Company Name              : Mindfire Solutions
   @Creator Name              : Hare Ram Rai
   @Date Created              : 15-12-2012
-  @Date Modified             :
-  @Last Modification Details :
+  @Date Modified             : 10-01-12013
+  @Last Modification Details : added association
   @Purpose                   : To manage the image model
 
 =end
@@ -34,16 +34,17 @@ class Image < ActiveRecord::Base
 #            VALIDATION ENDS HERE                                                                                    #
 ######################################################################################################################
  
-  ##########################
-  #Defining Associations   #
-  ##########################
-  
-    belongs_to :user
-    
-  ##########################
-  #End Defining Associations
-  ##########################  
-  
-  
-  
+##########################
+#Defining Associations   #
+##########################
+
+  belongs_to :user
+  has_many :image_downloads
+  has_many :image_views
+  has_many :image_shares
+
+##########################
+#End Defining Associations
+##########################  
+   
 end # end of class

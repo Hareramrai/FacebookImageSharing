@@ -1,5 +1,7 @@
 FileUploader::Application.routes.draw do
  
+  resources :categories
+
   resources :images do
     member do
       get "search"

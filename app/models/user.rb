@@ -25,7 +25,10 @@ class User < ActiveRecord::Base
   #Defining Associations   #
   ##########################
   
-  has_many :images
+  has_many :images   
+  has_many :image_downloads
+  has_many :image_views
+  has_many :image_shares
   
   ##########################
   #End Defining Associations
@@ -39,19 +42,17 @@ class User < ActiveRecord::Base
     user = User.where(:email => auth.info.email, :uid => auth.uid).first
     
     unless user
-      
-      user = User.create(name:auth.extra.raw_info.name,                         
-        uid:auth.uid,
-        email:auth.info.email,
-        facebook_image:auth.info.image,
-        auth_token: auth.credentials.token,
-        name: auth.info.name,
-        password: Devise.friendly_token[0,20]
+     user = User.create(:uid => auth.uid,
+        :email => auth.info.email,
+        :facebook_image => auth.info.image,
+        :auth_token => auth.credentials.token,
+        :name =>  auth.info.name,
+        :password => Devise.friendly_token[0,20]
       )
       
     else
         
-      user.update_attributes( auth_token: auth.credentials.token , facebook_image: auth.info.image)
+      user.update_attributes(:auth_token => auth.credentials.token , :facebook_image => auth.info.image)
         
     end
       
