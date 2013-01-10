@@ -54,6 +54,7 @@
               <% if can? :my_uploads, User %>
                 <li><%= link_to "My Uploads", my_uploads_users_path  %></li>
               <% end %>  
+              <li><%= link_to "Image Statistics", statistics_path  %> </li>
               <li>
                 <form class="navbar-search pull-left" action="/images/search/search">
                   <input type="text" name="key" class="search-query" placeholder="Search">
@@ -106,10 +107,9 @@
             <h3>Category </h3>
             <ul class="nav nav-list">
               <li class="nav-header">Photo By Category</li>
-              <li><%= link_to "Birthday", search_image_path(:birthday)  %></li>
-              <li><%= link_to "God",search_image_path(:god)   %></li>
-              <li><%= link_to "Science",search_image_path(:science)   %></li>
-              <li><%= link_to "Nature",search_image_path(:nature)  %></li>
+              <% @categories.each do |category| %>
+              <li><%= link_to category.title, search_image_path(category)  %></li>
+              <% end %>              
             </ul>
           </div><!--/.well -->
         </div><!--/span-->

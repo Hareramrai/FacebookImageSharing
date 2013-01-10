@@ -20,6 +20,10 @@ FileUploader::Application.routes.draw do
     end
   end
   
+  resources :statistics ,:only => [:index]do
+    
+  end
+  
 
   root :to => "publics#index"
 

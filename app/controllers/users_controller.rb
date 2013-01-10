@@ -67,7 +67,11 @@ class UsersController < ApplicationController
   def dropbox_download
     
    id = request.env["HTTP_REFERER"].split("/").last   
-   current_user.download_to_dropbox(current_user.id,id)          
+   current_user.download_to_dropbox(current_user.id,id)   
+   
+   # create image download record 
+   ImageDownload.create(:user_id => current_user.id, :image_id => id )
+          
    flash[:success] = "The image is successfully downloaded in your dropbox."
    
    redirect_to request.referrer

@@ -15,7 +15,7 @@
   <dt><strong><%= model_class.human_attribute_name(:verified) %>:</strong></dt>
   <dd><%= @image.verified %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category) %>:</strong></dt>
-  <dd><%= @image.category %></dd>
+  <dd><%= @image.category.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tags) %>:</strong></dt>
   <dd><%= @image.tags %></dd>
 </dl>

@@ -24,11 +24,11 @@ class ImagesController < ApplicationController
   def index
     
     #fetch the all images
-    @images = Image.all
+    @images = Image.includes(:category).all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @images }
+      format.json { render json: @images }      
     end
     
   end # end of index action
@@ -153,12 +153,12 @@ class ImagesController < ApplicationController
     if params[:id] == "search"
       
       # find the related image to params[:key]
-      @images = Image.where("tags LIKE ? OR  picture_file_name LIKE ? OR category LIKE ?", "%#{params[:key]}%", "%#{params[:key]}%", "%#{params[:key]}%")      
+      @images = Image.where("tags LIKE ? OR  picture_file_name LIKE ?", "%#{params[:key]}%", "%#{params[:key]}%")      
       
     else
       
       # find the image by category 
-      @images = Image.where("category = ?",params[:id])      
+      @images = Image.where("category_id = ?",params[:id])      
       
     end
     

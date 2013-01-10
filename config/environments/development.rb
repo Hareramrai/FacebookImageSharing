@@ -34,4 +34,7 @@ FileUploader::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
-end
+  
+  COLOR = %w( #0DA068 #194E9C #ED9C13 #ED5713 #057249 #5F91DC #F88E5D ) 
+  
+  end

@@ -63,6 +63,9 @@ class FacebookUploadsController < ApplicationController
       :tags => tags
     )
     
+    # create image share record 
+    ImageShare.create(:user_id => current_user.id, :image_id => @image.id )
+    
     flash[:success] = "Successfully uploaded and tagged the your friends."   
  
     redirect_to image_path(@image)
@@ -70,3 +73,4 @@ class FacebookUploadsController < ApplicationController
   end # end of create action 
       
 end # end of class
+

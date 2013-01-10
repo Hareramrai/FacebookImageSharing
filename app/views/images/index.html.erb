@@ -27,7 +27,7 @@
           <td><%= link_to (image_tag  image.picture.url(:thumb,:download => true)), image_path(image)  %></td>
           <td><%= image.picture_content_type %></td>        
           <td><%= image.verified %></td>
-          <td><%= image.category %></td>
+          <td><%= image.category.title %></td>
           <td><%= image.tags %></td>
           <td><%=l image.created_at %></td>
           <% if can? :create, Image %>
