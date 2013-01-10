@@ -11,7 +11,7 @@
 =end
 class Image < ActiveRecord::Base  
   
-  attr_accessible :picture, :verified, :category, :tags, :user_id
+  attr_accessible :picture, :verified, :category, :tags, :user_id, :category_id
     
   has_attached_file :picture,
     :storage => :dropbox,
@@ -39,9 +39,10 @@ class Image < ActiveRecord::Base
 ##########################
 
   belongs_to :user
+  belongs_to :category
   has_many :image_downloads
   has_many :image_views
-  has_many :image_shares
+  has_many :image_shares  
 
 ##########################
 #End Defining Associations
