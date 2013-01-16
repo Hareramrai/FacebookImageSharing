@@ -10,21 +10,22 @@
   <table id="chartData">
 	  <tr>
 	   <th>Category</th>
-	   <th>Images Count</th>
+	   <th>Views</th>
 	  </tr>
-  		<% i = 0%>
-	  <% @categories.each do |category|%>
 	  
-	  	<tr style="color:<%= COLOR[i]%> ">
-	  		
-	    	<td><%= category.title%></td>
-	    	<td><%= category.images.count%></td>
-	    	
-	  	</tr>
+  		<% i = 0%>
+  		
+	  	<% @categories.each do |category|%>
+	  
+	  		<tr style="color:<%= COLOR[i]%> ">	  		
+	    		<td><%= category.title%></td>
+	    		<td><%= category.images.count%></td>	    	
+	  		</tr>
 	  	
-	  	<% i = i + 1%>
-	  <% end%>
-
+	  		<% i = i + 1%>
+	  	
+	  	<% end%>
+	  	
   </table>
 
 </div>
