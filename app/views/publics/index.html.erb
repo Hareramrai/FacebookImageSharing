@@ -7,7 +7,7 @@
         <div class="item">
           <%= link_to(image_tag(image.picture.url(:medium)),image_path(image))%>
           <div class="carousel-caption">
-            <h4><b>Category:</b> <%= image.category %></h4>
+            <h4><b>Category:</b> <%= image.category.title %></h4>
             <p><%= image.tags%></p>
           </div>
         </div>

@@ -19,6 +19,9 @@ class Category < ActiveRecord::Base
   ##########################
   
   has_many :images   
+  has_many :image_views, :through => :images
+  has_many :image_downloads, :through => :images
+  has_many :image_shares, :through => :images 
     
   ##########################
   #End Defining Associations

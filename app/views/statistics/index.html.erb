@@ -1,31 +1,97 @@
 <div class="page-header">
-  <h1>Image Statistics </h1>
+	<h1>Image Statistics </h1>
 </div>
-
-
 <div id="container">
-	 
-  <canvas id="chart" width="600" height="500"></canvas>
+	<ul class="nav nav-tabs" id="myTab">
+		<li class="active">
+			<a data-toggle="tab" href="#image-by-category">By Category</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#image-by-viewed">By Viewed</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#image-by-downloads">By Downloads</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#image-by-shared">By Shared</a>
+		</li>		
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="image-by-category">
+			<canvas id="chart" width="600" height="500" class="chart-c"></canvas>
+			<table id="chartData" class="chart-data-t">
+				<tr>
+					<th>Category</th>
+					<th>#Image</th>
+				</tr>
+				<% i = 0%>
 
-  <table id="chartData">
-	  <tr>
-	   <th>Category</th>
-	   <th>Views</th>
-	  </tr>
-	  
-  		<% i = 0%>
-  		
-	  	<% @categories.each do |category|%>
-	  
-	  		<tr style="color:<%= COLOR[i]%> ">	  		
-	    		<td><%= category.title%></td>
-	    		<td><%= category.images.count%></td>	    	
-	  		</tr>
-	  	
-	  		<% i = i + 1%>
-	  	
-	  	<% end%>
-	  	
-  </table>
+				<% @categories.each do |category|%>
+				<tr style="color:<%= COLOR[i]%> ">
+					<td><%= category.title%></td>
+					<td><%= category.images.count%></td>
+				</tr>
+				<% i = i + 1%>
 
+				<% end%>
+			</table>
+		</div>
+		<div class="tab-pane" id="image-by-viewed">
+			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
+			<table id="chartDataa" class="chart-data-t">
+				<tr>
+					<th>Category</th>
+					<th>#Viewed</th>
+				</tr>
+				<% i = 0%>
+
+				<% @categories.each do |category|%>
+				<tr style="color:<%= COLOR[i]%> ">
+					<td><%= category.title%></td>
+					<td><%= category.image_views.count%></td>
+				</tr>
+				<% i = i + 1%>
+
+				<% end%>
+			</table>
+		</div>
+		<div class="tab-pane" id="image-by-downloads">
+			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
+			<table id="chartDataa" class="chart-data-t">
+				<tr>
+					<th>Category</th>
+					<th>#Downloads</th>
+				</tr>
+				<% i = 0%>
+
+				<% @categories.each do |category|%>
+				<tr style="color:<%= COLOR[i]%> ">
+					<td><%= category.title%></td>
+					<td><%= category.image_downloads.count%></td>
+				</tr>
+				<% i = i + 1%>
+
+				<% end%>
+			</table>
+		</div>
+		<div class="tab-pane" id="image-by-shared">
+			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
+			<table id="chartDataa" class="chart-data-t">
+				<tr>
+					<th>Category</th>
+					<th>#Shared</th>
+				</tr>
+				<% i = 0%>
+
+				<% @categories.each do |category|%>
+				<tr style="color:<%= COLOR[i]%> ">
+					<td><%= category.title%></td>
+					<td><%= category.image_shares.count%></td>
+				</tr>
+				<% i = i + 1%>
+
+				<% end%>
+			</table>
+		</div>
+	</div>
 </div>

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # @Purpose : To get all category
   def get_categories
     
-    @categories = Category.all
+    @categories = Category.includes(:images)
     
   end
   
