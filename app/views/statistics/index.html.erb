@@ -18,8 +18,8 @@
 	</ul>
 	<div class="tab-content">
 		<div class="tab-pane active" id="image-by-category">
-			<canvas id="chart" width="600" height="500" class="chart-c"></canvas>
-			<table id="chartData" class="chart-data-t">
+			<canvas id="by-category-c" width="600" height="500" class="chart-c"></canvas>
+			<table id="by-category-t" class="chart-data-t">
 				<tr>
 					<th>Category</th>
 					<th>#Image</th>
@@ -29,7 +29,7 @@
 				<% @categories.each do |category|%>
 				<tr style="color:<%= COLOR[i]%> ">
 					<td><%= category.title%></td>
-					<td><%= category.images.count%></td>
+					<td><%= category.images.size%></td>
 				</tr>
 				<% i = i + 1%>
 
@@ -37,8 +37,8 @@
 			</table>
 		</div>
 		<div class="tab-pane" id="image-by-viewed">
-			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
-			<table id="chartDataa" class="chart-data-t">
+			<canvas id="by-viewed-c" width="600" height="500" class="chart-c"></canvas>
+			<table id="by-viewed-t" class="chart-data-t">
 				<tr>
 					<th>Category</th>
 					<th>#Viewed</th>
@@ -48,7 +48,7 @@
 				<% @categories.each do |category|%>
 				<tr style="color:<%= COLOR[i]%> ">
 					<td><%= category.title%></td>
-					<td><%= category.image_views.count%></td>
+					<td><%= category.image_views.size%></td>
 				</tr>
 				<% i = i + 1%>
 
@@ -56,8 +56,8 @@
 			</table>
 		</div>
 		<div class="tab-pane" id="image-by-downloads">
-			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
-			<table id="chartDataa" class="chart-data-t">
+			<canvas id="by-downloads-c" width="600" height="500" class="chart-c"></canvas>
+			<table id="by-downloads-t" class="chart-data-t">
 				<tr>
 					<th>Category</th>
 					<th>#Downloads</th>
@@ -67,7 +67,7 @@
 				<% @categories.each do |category|%>
 				<tr style="color:<%= COLOR[i]%> ">
 					<td><%= category.title%></td>
-					<td><%= category.image_downloads.count%></td>
+					<td><%= category.image_downloads.size%></td>
 				</tr>
 				<% i = i + 1%>
 
@@ -75,8 +75,8 @@
 			</table>
 		</div>
 		<div class="tab-pane" id="image-by-shared">
-			<canvas id="charta" width="600" height="500" class="chart-c"></canvas>
-			<table id="chartDataa" class="chart-data-t">
+			<canvas id="by-shared-c" width="600" height="500" class="chart-c"></canvas>
+			<table id="by-shared-t" class="chart-data-t">
 				<tr>
 					<th>Category</th>
 					<th>#Shared</th>
@@ -86,7 +86,7 @@
 				<% @categories.each do |category|%>
 				<tr style="color:<%= COLOR[i]%> ">
 					<td><%= category.title%></td>
-					<td><%= category.image_shares.count%></td>
+					<td><%= category.image_shares.size%></td>
 				</tr>
 				<% i = i + 1%>
 

@@ -42,7 +42,8 @@ class ImagesController < ApplicationController
     # find the image by id
     @image = Image.find(params[:id])
     ImageView.find_or_create_by_user_id_and_image_id(current_user.id,@image.id)
-
+    PrivatePub.publish_to("/messages/new", message: @image)
+          
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @image }

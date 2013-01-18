@@ -1,7 +1,19 @@
-
-
-// Run the code when the DOM is ready
-$( pieChart );
+	
+	PrivatePub.subscribe("/messages/new", function(data, channel) {
+  		 console.log(data.message);
+	});
+	
+	// PrivatePub.subscribe("/images/show", function(data, channel) {
+  		 // console.log(data.message);
+	// });
+// 	
+	// PrivatePub.subscribe("/image_downloads/new", function(data, channel) {
+  		 // console.log(data.message);
+	// });
+// 	
+	// PrivatePub.subscribe("/image_shared/new", function(data, channel) {
+  		 // console.log(data.message);
+	// });
 
 function pieChart() {
 
@@ -38,14 +50,16 @@ function pieChart() {
   var centreX;                      // X-coordinate of centre of the canvas/chart
   var centreY;                      // Y-coordinate of centre of the canvas/chart
   var chartRadius;                  // Radius of the pie chart, in pixels
-
-  // Set things up and draw the chart
-  init();
-  function init() {
+  var chartDataElement ;
+  var pieChartObj = new Object();
+   
+  
+  function init(canvasElement,dataElement) {
 
     // Get the canvas element in the page
-    canvas = document.getElementById('chart');
-
+    canvas = canvasElement;
+    chartDataElement = dataElement;
+    
     // Exit if the browser isn't canvas-capable
     if ( typeof canvas.getContext === 'undefined' ) return;
 
@@ -59,7 +73,7 @@ function pieChart() {
     var currentRow = -1;
     var currentCell = 0;
 
-    $('#chartData td').each( function() {
+  chartDataElement.find("td").each( function() {
       currentCell++;
       if ( currentCell % 2 != 0 ) {
         currentRow++;
@@ -100,7 +114,7 @@ function pieChart() {
 
     // All ready! Now draw the pie chart, and add the click handler to it
     drawChart();
-    $('#chart').click ( handleChartClick );
+    $(canvas).click ( handleChartClick );
   }
 
 
@@ -162,9 +176,9 @@ function pieChart() {
     animationId = setInterval( function() { animatePullOut( slice ); }, pullOutFrameInterval );
 
     // Highlight the corresponding row in the key table
-    $('#chartData td').removeClass('highlight');
-    var labelCell = $('#chartData td:eq(' + (slice*2) + ')');
-    var valueCell = $('#chartData td:eq(' + (slice*2+1) + ')');
+    chartDataElement.find("td").removeClass('highlight');
+    var labelCell = chartDataElement.find('td:eq(' + (slice*2) + ')');
+    var valueCell = chartDataElement.find('td:eq(' + (slice*2+1) + ')');
     labelCell.addClass('highlight');
     valueCell.addClass('highlight');
   }
@@ -188,7 +202,7 @@ function pieChart() {
     currentPullOutDistance = 0;
     clearInterval( animationId );
     drawChart();
-    $('#chartData td').removeClass('highlight');
+    chartDataElement.find('td').removeClass('highlight');
   }
 
   function drawChart() {
@@ -267,5 +281,27 @@ function pieChart() {
   function easeOut( ratio, power ) {
     return ( Math.pow ( 1 - ratio, power ) + 1 );
   }
-
+  
+  pieChartObj.init = init;
+  
+  return pieChartObj;
 };
+
+
+$(document).ready(function(){
+		
+	var byCategory = new pieChart();
+	byCategory.init(document.getElementById("by-category-c"),$("#by-category-t"));
+	
+	var byViewed = new pieChart();
+	byViewed.init(document.getElementById("by-viewed-c"),$("#by-viewed-t"));
+	
+	var byDownloads = new pieChart();
+	byDownloads.init(document.getElementById("by-downloads-c"),$("#by-downloads-t"));
+	
+	var byShared = new pieChart();
+	byShared.init(document.getElementById("by-shared-c"),$("#by-shared-t"));
+		
+});
+
+	

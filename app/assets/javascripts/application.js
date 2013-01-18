@@ -12,9 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require private_pub
 //= require bootstrap-fileupload
 //= require twitter/bootstrap
-//= require_tree .
+//= require bootstrap
+//= require jquery.colorbox
+//= require jquery.tokeninput
+
 
 $(document).ready(function(){
 

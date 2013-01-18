@@ -19,7 +19,8 @@ gem "dropbox-sdk"
 gem "cancan"
 gem "fb_graph"
 gem 'libv8', '~> 3.11.8'
-gem 'delayed_job_active_record'
+gem 'private_pub'
+gem 'thin'
 group :production do
   gem "pg"
 end
