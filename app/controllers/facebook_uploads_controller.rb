@@ -66,6 +66,14 @@ class FacebookUploadsController < ApplicationController
     # create image share record 
     ImageShare.create(:user_id => current_user.id, :image_id => @image.id )
     
+    # fetch the new record for images viewed by category
+    categories = ImageShare.joins("JOIN images on  image_shares.`image_id` = images.`id` RIGHT JOIN categories on categories.`id` = images.`category_id`").group("categories.id").
+     select('categories.title as title,count(image_shares.id) as count').order("categories.title")
+
+    # push the new data to the byimageshared channel        
+    PrivatePub.publish_to("/notifications/byimageshared","updateImageShared(#{categories.to_json})")
+    
+    
     flash[:success] = "Successfully uploaded and tagged the your friends."   
  
     redirect_to image_path(@image)

@@ -304,4 +304,74 @@ $(document).ready(function(){
 		
 });
 
+
+function updateImageCreated(data){
 	
+	var table = $("#by-category-t");
+	var tableContents = "<tr><th>Category</th><th>#Image</th></tr>";
+	$.each(data,function(key,value){
+		
+	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
+	 	 	
+	});
+	
+	table.html(tableContents);
+	
+	var byCategory = new pieChart();
+	byCategory.init(document.getElementById("by-category-c"),$("#by-category-t"));
+	
+}
+
+
+function updateImageViewed(data){
+	
+	var table = $("#by-viewed-t");
+	var tableContents = "<tr><th>Category</th><th>#Viewed</th></tr>";
+	$.each(data,function(key,value){
+		
+	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
+	 	 	
+	});
+	
+	table.html(tableContents);
+	
+	var byViewed = new pieChart();
+	byViewed.init(document.getElementById("by-viewed-c"),$("#by-viewed-t"));
+	
+	
+}	
+
+
+function updateImageShared(data){
+	
+	var table = $("#by-downloads-t");
+	var tableContents = "<tr><th>Category</th><th>#Downloads</th></tr>";
+	$.each(data,function(key,value){
+		
+	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
+	 	 	
+	});
+	
+	table.html(tableContents);
+	
+	var byShared = new pieChart();
+	byShared.init(document.getElementById("by-downloads-c"),$("#by-downloads-t"));
+		
+}
+
+function updateImageDownloads(data){
+	
+	var table = $("#by-shared-t");
+	var tableContents = "<tr><th>Category</th><th>#Shared</th></tr>";
+	$.each(data,function(key,value){
+		
+	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
+	 	 	
+	});
+	
+	var byDownloads = new pieChart();
+	byDownloads.init(document.getElementById("by-downloads-c"),$("#by-downloads-t"));
+}
+
+
+var COLOR = [ '#0DA068','#194E9C','#ED9C13','#ED5713','#057249','#5F91DC','#F88E5D' ]

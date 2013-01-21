@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   # @Purpose : To get all category
   def get_categories
     
-    @categories = Category.includes(:images)
+    @categories = Category.includes(:images).order("categories.title")
     
   end
   

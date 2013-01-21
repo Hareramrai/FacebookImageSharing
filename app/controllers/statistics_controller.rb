@@ -13,7 +13,7 @@
 class StatisticsController < ApplicationController
   
   def index
-    PrivatePub.publish_to("/messages/new", message: "demo testing")
+    
   end
   
 end

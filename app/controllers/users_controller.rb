@@ -71,7 +71,14 @@ class UsersController < ApplicationController
    
    # create image download record 
    ImageDownload.create(:user_id => current_user.id, :image_id => id )
-          
+    
+   # fetch the new record for images viewed by category
+    categories = ImageDownload.joins("JOIN images on  image_downloads.`image_id` = images.`id` RIGHT JOIN categories on categories.`id` = images.`category_id`").group("categories.id").
+     select('categories.title as title,count(image_downloads.id) as count').order("categories.title")
+
+    # push the new data to the byimagedownloads channel        
+    PrivatePub.publish_to("/notifications/byimagedownloads","updateImageDownloads(#{categories.to_json})")
+           
    flash[:success] = "The image is successfully downloaded in your dropbox."
    
    redirect_to request.referrer

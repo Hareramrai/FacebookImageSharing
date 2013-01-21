@@ -42,7 +42,13 @@ class ImagesController < ApplicationController
     # find the image by id
     @image = Image.find(params[:id])
     ImageView.find_or_create_by_user_id_and_image_id(current_user.id,@image.id)
-    PrivatePub.publish_to("/messages/new", message: @image)
+    
+    # fetch the new record for images viewed by category 
+    categories = ImageView.joins("JOIN images on  image_views.`image_id` = images.`id` RIGHT JOIN categories on categories.`id` = images.`category_id`").
+    group("categories.id").select('categories.title as title,count(image_views.id) as count').order("categories.title")
+        
+    # push the new data to the byimageviewed channel    
+    PrivatePub.publish_to("/notifications/byimageviewed","updateImageViewed(#{categories.to_json})")
           
     respond_to do |format|
       format.html # show.html.erb
@@ -89,6 +95,10 @@ class ImagesController < ApplicationController
     
     respond_to do |format|
       if @image.save
+        
+        categories = Category.joins("LEFT OUTER JOIN images on categories.`id` = images.`category_id`").group("categories.id").select('categories.title,count(images.category_id) as count') 
+        PrivatePub.publish_to("/notifications/bycategory","updateImageCreated(#{categories.to_json})")
+    
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
         format.json { render json: @image, status: :created, location: @image }
       else
