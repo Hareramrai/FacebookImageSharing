@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
     current_user = User.find_by_id(user_id)    
     dbsession = DropboxSession.deserialize(current_user.dropbox_session)
     # create the dropbox client object
-    to_client = DropboxClient.new(dbsession, DROPBOX_APP_MODE)     
+    to_client = DropboxClient.new(dbsession, ENV["DROPBOX_APP_MODE"])     
     
     # fetch the image from image_id
     image = Image.find_by_id(image_id)    

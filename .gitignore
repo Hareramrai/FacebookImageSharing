@@ -15,3 +15,8 @@
 /tmp
 /.rvm
 /nbproject
+
+# Ignore application configuration
+/config/application.yml
+# Ignore dropbox configuration
+/config/dropbox.yml

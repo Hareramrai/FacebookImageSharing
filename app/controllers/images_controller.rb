@@ -25,6 +25,7 @@ class ImagesController < ApplicationController
     
     #fetch the all images
     @images = Image.includes(:category).all
+    @images.created_at
 
     respond_to do |format|
       format.html # index.html.erb

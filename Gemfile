@@ -7,7 +7,12 @@ gem 'rails', '3.2.8'
 
 group :development do
   gem 'mysql2'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
+
+gem "figaro"
 
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"

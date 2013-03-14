@@ -344,8 +344,8 @@ function updateImageViewed(data){
 
 function updateImageShared(data){
 	
-	var table = $("#by-downloads-t");
-	var tableContents = "<tr><th>Category</th><th>#Downloads</th></tr>";
+	var table = $("#by-shared-t");
+	var tableContents = "<tr><th>Category</th><th>#Shared</th></tr>";
 	$.each(data,function(key,value){
 		
 	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
@@ -355,19 +355,21 @@ function updateImageShared(data){
 	table.html(tableContents);
 	
 	var byShared = new pieChart();
-	byShared.init(document.getElementById("by-downloads-c"),$("#by-downloads-t"));
+	byShared.init(document.getElementById("by-shared-c"),$("#by-shared-t"));
 		
 }
 
 function updateImageDownloads(data){
 	
-	var table = $("#by-shared-t");
-	var tableContents = "<tr><th>Category</th><th>#Shared</th></tr>";
+	var table = $("#by-downloads-t");
+	var tableContents = "<tr><th>Category</th><th>#Downloads</th></tr>";
 	$.each(data,function(key,value){
-		
+	 console.log(value);	
 	 tableContents = tableContents + "<tr style='color:"+COLOR[key]+"'><td>"+value.title+"</td><td>"+value.count+"</td></tr>";  		  
 	 	 	
 	});
+	
+	table.html(tableContents);
 	
 	var byDownloads = new pieChart();
 	byDownloads.init(document.getElementById("by-downloads-c"),$("#by-downloads-t"));

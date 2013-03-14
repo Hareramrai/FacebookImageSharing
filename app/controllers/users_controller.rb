@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   # @Purpose : To create new dropbox session for authorization
   def authorize
     
-    dbsession = DropboxSession.new(DROPBOX_APP_KEY, DROPBOX_APP_KEY_SECRET)
+    dbsession = DropboxSession.new(ENV["DROPBOX_APP_KEY"],ENV["DROPBOX_APP_KEY_SECRET"])
     #serialize and save this DropboxSession
     session[:dropbox_session] = dbsession.serialize     
     #pass to get_authorize_url a callback url that will return the user here

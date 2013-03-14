@@ -210,7 +210,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :facebook, '136186583202037', '482272008cd519bd9d820925f594bfea', 
+  config.omniauth :facebook,ENV['FACEBOOK_API_KEY'],ENV['FACEBOOK_API_SECRET'], 
     :scope => 'email,friends_photo_video_tags,friends_photos,manage_friendlists,offline_access,photo_upload,
       publish_stream,read_friendlists,share_item,user_birthday,user_hometown,user_location,
       ,user_photos,user_work_history',
